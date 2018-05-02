@@ -1,6 +1,3 @@
-
-% online shit from YT
-
 categories = {'Construction','Pedestrian','SpeedLimit','Stop Signs','Traffic Light','Yield'};
 rootFolder = 'Data';
 imds = imageDatastore(fullfile(rootFolder, categories), ...
@@ -9,7 +6,7 @@ imds = imageDatastore(fullfile(rootFolder, categories), ...
 %don't know if varSize is right or not
 varSize = length(imds);
 
-convl = convolution2dLayer(5, varSize, 'Padding', 2, 'BlastLearnRateFactor', 2);
+convl = convolution2dLayer(5, varSize, 'Padding', 2, 'BiasLearnRateFactor', 2);
 convl.Weights = gpuArray(single(randn([5 5 3 varSize]) * 0.0001));
 
 fc1 = fullyConnectedLayer(64, 'BiasLearnRateFactor', 2);
